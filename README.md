@@ -1,41 +1,48 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
-
 # Repo do Desafio2 da Maratona DevFullCycle 2.0
 
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
+### Rodando o projeto localmente
 
 ```bash
+# instale as dependencias
 $ npm install
-```
 
-## Running the app
+# crie/atualize o banco de dados
+$ npm run typeorm migration:run
 
-```bash
-# development
-$ npm run start
-
-# watch mode
+# inicie o servidor com hot reload
 $ npm run start:dev
 
-# production mode
-$ npm run start:prod
+# se precisar atualizar o esquema do banco de dados
+$ npm run typeorm migration:generate -- -n <Nome da Migration>
 ```
 
-## Test
+### Executando a imagem Docker do projeto
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+$ docker run -p 3000:3000 bmnds/desafio2
 ```
+
+### Gravando e lendo maratonas
+
+```bash
+# crie uma nova
+$ curl --location --request POST 'http://localhost:3000/maratona' \
+      --header 'Content-Type: application/json' \
+      --data-raw '{
+	      "aula": "gRPC",
+        "url": "https://www.youtube.com/watch?v=VMCRRznA3g0"
+      }'
+
+# recupere a lista
+$ curl --location --request GET 'http://localhost:3000/maratona'
+```
+
+### Tecnologias utilizadas
+* [NestJS](https://nestjs.com/)
+* [TypeORM](https://typeorm.io/)
+* [Sqlite3](https://www.npmjs.com/package/sqlite3)
+* [Node.js](https://nodejs.org/)
+
+### Repositórios do projeto
+* [Desafio2 em GitHub](https://github.com/bmnds/maratona_fullcycle_2-desafio2)
+* [Desafio2 no DockerHub](https://hub.docker.com/repository/docker/bmnds/desafio2)
