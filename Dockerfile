@@ -5,6 +5,7 @@ USER node
 COPY . . 
 RUN npm --logevel=error install
 RUN npm run typeorm migration:run
+RUN npm run seed:run
 RUN npm run build
 
 #use a small footprint image to run the app
